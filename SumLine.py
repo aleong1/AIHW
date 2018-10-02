@@ -1,6 +1,3 @@
-# Alexia Leong
-# SumLine
-
 #! /usr/bin/python3
 import sys
 
