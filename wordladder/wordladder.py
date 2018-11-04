@@ -141,15 +141,14 @@ class PQueue:    #mr.brook's
 
 def compare(a,b):  #new compare fxn
     if a.value < b.value: return -1
-    elif a.value == b.value:
-        if len(a.path) <= len(b.path): return -1
+    elif a.value == b.value: return 0
     return 1
 
 class Node:
-    def __init__(self, name, value, path):
+    def __init__(self, name):
         self.name = name
-        self.value = value
-        self.path = path
+        self.value = 1
+        self.path = name
 
 fin = open('dictall.txt','r')
 finLines = fin.read().split('\n')
@@ -176,8 +175,6 @@ def makeDictionary(length):
             dictionary[word] = neighbors
     return dictionary
 
-
-explore = set()
 def distance(word, end):
     dif = 0
     for char in range(len(word)):
@@ -186,31 +183,29 @@ def distance(word, end):
     return dif
 
 def WordLadder(start, target):
-    WordLadder = start
     explored = set()
-    temp = start
     frontier = PQueue(True, compare, [])
-    frontier.push(Node(start, 0, explored))
-    while temp != target:
-        listKey = dictionary[temp]
+    frontier.push(Node(start))
+
+    while frontier.peek() != None:
+        temp = frontier.pop()
+        if temp.name in explored:
+            continue
+
+        if temp.name == target:
+            return temp.path
+
+        #find neighbors
+        listKey = dictionary[temp.name]
         for neighbor in listKey:
-            if neighbor not in explored:
-                value = distance(neighbor, temp) + distance(neighbor, target)
-                path = explored
-                newNode = Node(neighbor, value, path)
-                frontier.push(newNode)
+            newNode = Node(neighbor)
+            newNode.path = temp.path + ',' + neighbor
+            newNode.value = temp.value +  distance(neighbor, temp.name)
+            frontier.push(newNode)
 
-        if frontier.peek() == None:
-            return start + ',' + target
-        while frontier.peek().name in explored or frontier.peek().name not in listKey:
-            frontier.pop()
-            if frontier.peek() == None:
-                return start + ',' + target
+        explored.add(temp.name)
 
-        explored.add(temp)
-        temp = frontier.pop().name
-        WordLadder += ','+ temp
-    return WordLadder
+    return start + ',' + target
 
 makeDictionary(len(list(inputLines[0].strip().split(','))[0]))
 for lines in inputLines:

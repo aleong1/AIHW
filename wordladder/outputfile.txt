@@ -1,5 +1,5 @@
-head,heal,teal,tell,tall,tail
-hate,have,hove,love
+head,hear,heir,hair,hail,tail
+hate,late,lave,love
 read,head
-hazy,lazy,laze,faze,fate,fats,fays,fans,fang,yang,tang,tong,ting,zing,wing,sing,sung,song,sang,rang,rung,ring,ping,pang,hang,hung,lung,long,ling,king,ding,dung,dong,dang,gang,gong,bong,bung,burg,berg,berm,beam,beau,beat,brat,brag,brig,frig,frog
+hazy,haze,hate,bate,bats,baas,bras,brag,brig,frig,frog
 head,ache
